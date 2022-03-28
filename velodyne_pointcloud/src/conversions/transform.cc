@@ -43,14 +43,14 @@ namespace velodyne_pointcloud
     }
 
     // advertise output point cloud (before subscribing to input data)
-    output_ = node.advertise<sensor_msgs::PointCloud2>("velodyne_points", 10);
+    output_ = node.advertise<sensor_msgs::PointCloud2>("velodyne_points2", 10);
 
     srv_ = boost::make_shared<dynamic_reconfigure::Server<TransformNodeCfg>> (private_nh);
     dynamic_reconfigure::Server<TransformNodeCfg>::CallbackType f;
     f = boost::bind (&Transform::reconfigure_callback, this, _1, _2);
     srv_->setCallback (f);
 
-    velodyne_scan_ = node.subscribe("velodyne_packets", 10, &Transform::processScan, this);
+    velodyne_scan_ = node.subscribe("velodyne_packets2", 10, &Transform::processScan, this);
 
     // Diagnostics
     diagnostics_.setHardwareID("Velodyne Transform");
@@ -59,7 +59,7 @@ namespace velodyne_pointcloud
     diag_min_freq_ = 2.0;
     diag_max_freq_ = 20.0;
     using namespace diagnostic_updater;
-    diag_topic_.reset(new TopicDiagnostic("velodyne_points", diagnostics_,
+    diag_topic_.reset(new TopicDiagnostic("velodyne_points2", diagnostics_,
                                           FrequencyStatusParam(&diag_min_freq_,
                                                                &diag_max_freq_,
                                                                0.1, 10),
