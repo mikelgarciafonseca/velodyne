@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(velodyne_pointcloud)
+project(velodyne_pointcloud2)
 
 # Set minimum C++ standard to C++11
 if (NOT "${CMAKE_CXX_STANDARD_COMPUTED_DEFAULT}")
